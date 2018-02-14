@@ -1,68 +1,68 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
 
 
 int main()
 {
     double nNum[2], sol;
-    char plh;
+    char plh, firstChar;
     int i;
     _Bool bScan;
-    
 
-    /* for(i=0; i<=anzWerte-1; i++){
-        int test = getchar();
+    for(i=0;i<2;i++){
+        printf("Gib den %i. Wert ein.\n", i+1);
 
-        scanf("%lf%c", &nNum[i], &plh);
-        printf("%i", test);
-        
-        if (test >= 48 || test <= 58){
-            sol = sol + nNum[i];
-        }else{
-            printf("Die Eingabe ist unzulässig, bitte versuche es erneut.");
-            return 0;
-
-        } */
-
-        /*Addition*/
-        
-    for(i=0;i<=1;i++){
+        /* Eingabe überprüfen */
         firstChar = getchar();
-        if(isDigit(firstChar) || firstChar == '.'){
-            printf("Gib den %i. Wert ein.\n", i+1);
+        ungetc(firstChar, stdin);
 
+        /* Erstes Zeichen wird überprüft */
+        if((firstChar > '0' && firstChar < '9') || firstChar == '.' || firstChar == '-'){
+            bScan = scanf("%lf%c", &nNum[i], &plh) == 2;
+            if(bScan){
 
-            bScan = scanf("%lf%c", &nNum[i], &plh) != 2;
-            if(!bScan){
+                /* Zweifach erfolgreiche Eingabe */
                 if(i==1){
                     sol = nNum[0] + nNum[1];
                 }
-            }else{
-                printf("Die Eingabe ist unzulässig, bitte versuche es erneut.\n");
-                return 1;
-            }
-            if(plh != '\n'){
-                printf("Die Eingabe ist unzulässig, bitte versuche es erneut.\n");
-                return 1;
-            }
-        }else if(firstChar == '\n'){
-                printf("Leere Eingabe, bitte versuche es erneut.\n");
-                return 1;
 
-        }else if(firstChar == '\'){
-                printf("Voran gegangenes Whitespace, bitte versuche es erneut.\n");
+                /* Fehler in scanf() */
+            }else{
+                printf("Die Eingabe enthält ein unzulässiges Zeichen, bitte versuche es erneut.\n");
+                return 1;
+            }
+
+            if(plh != '\n'){
+                printf("Die Eingabe enthält nachfolgende Zeichen, bitte versuche es erneut.\n");
+                return 1;
+            }
+
+        /* Eingabe ohne Inhalt */
+        }else if(firstChar == '\n'){
+            printf("Leere Eingabe, bitte versuche es erneut.\n");
+            return 1;
+        
+        /* Erstes Zeichen == Leerzeichen */
+        }else if(firstChar == ' ' || firstChar == '\t' || firstChar == '\v'){
+            printf("Vorangegangenes Whitespace, bitte versuche es erneut.\n");
+            return 1;
+
+        /* Undefinierter Fehler */
+        }else{
+            printf("Die Eingabe enthält ein unzulässiges Zeichen, bitte versuche es erneut.\n");
+            return 1;
+        }
         
     
     }
 
     /*Rückgabe der Lösung*/
-    printf("Die Summe zwischen den Werten beträgt %lf.\n", sol);
+    printf("Die Summe der Werte beträgt %lf.\n", sol);
     return 0;
 }
 
 
-/*a13.Das Programm soll 2 double Werte einlesen und deren Summe ausgeben. Die
+/*
+a13.Das Programm soll 2 double Werte einlesen und deren Summe ausgeben. Die12
 beiden Werte sollen einzeln eingelesen werden. Eine gültige Eingabe besteht
 dabei aus dem double-Wert gefolgt von einem RETURN. Ungültige Eingaben werden
 mit einer entsprechenden Fehlermeldung quittiert.
@@ -70,20 +70,3 @@ mit einer entsprechenden Fehlermeldung quittiert.
 - gültige Eingabe: doublewert und Return, kein Space oder sonstige Zeichen nach double. Entsprechende Fehlermeldung bei falschem Zeichen. Beliebige Eingabe möglich -> Fehlermeldung implementieren
 
 */
-
-
-
-
-
-
-firstChar = getchar();
-
-if(isdigit(firstChar) || firstChar == '.'){
-    ungetc()
-    if(scanf("%lf%c", &x, &c) == 2){
-        if(c != '\n'){
-            Fehler
-        }
-    }
-
-}
