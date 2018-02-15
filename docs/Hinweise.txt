@@ -1,0 +1,44 @@
+HINWEISE ZU DEN ÜBUNGSAUFGABEN
+
+1. Im Homedirectory ist ein Verzeichnis namens C mit den Permissions 705
+   anzulegen:
+		mkdir $HOME/C;chmod 705 $HOME/C
+   Unter diesem Verzeichnis sollen die Sourcefiles mit den Aufgabennummern
+   entsprechenden Namen a01.c, a02.c,... und die dazugehörigen Executables
+   a01, a02, ... liegen.
+
+2. Die Spezifikation der Aufgaben ist natürlichsprachlich und daher mehrdeutig und
+   unvollständig. Bei Unklarheiten immer bei mir nachfragen!
+
+3. Der Sourcefile
+
+   -ist in ANSI-C geschrieben.
+   -enthält die programmierte Lösung der entsprechenden Aufgabe.
+   -ist konsistent mit Einrückungen versehen.
+   -ist mit Kommentaren versehen.
+   -benutzt sinnfällige Namen für wichtige Programmgrößen.
+   -hat den Namen a"nn".c, wobei nn die Aufgabennummer ist.
+   -hat die Permissions 604.
+   -lässt sich auf chameleon mit gcc -ansi -Wall ohne Fehler und Warnungen
+    compilieren.
+
+4. Das ausführbare Programm
+
+   -wurde durch Compilieren auf chameleon erzeugt.
+   -hat den Namen a"nn", wobei nn die Aufgabennummer ist.
+   -hat die Permissions 705.
+
+5. Die Aufgaben 11 bis 20 stellen eine Prüfungsleistung dar und
+   werden mit Punkten bewertet:
+
+	- 0 Punkte  : Keine Lösung oder schwerwiegende Fehler
+	- 0.5 Punkte: lauffähiges Programm mit kleinen Fehlern
+	- 1 Punkt   : sonst
+
+   Sobald eine Aufgabe gelöst erscheint, kann sie zur Begutachtung
+   gemeldet werden. Wurde weniger als 1 Punkt erreicht,
+   kann EINMAL nachkorrigiert werden.
+
+   Die Aufgaben sind selbstständig zu bearbeiten (kein Teamwork, ab-
+   schreiben, etc.)! Bei Betrugsverdacht werden alle 10 Aufgaben
+   mir 0 Punkten bewertet.

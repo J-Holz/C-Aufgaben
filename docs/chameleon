@@ -1,0 +1,14 @@
+Verbindung Chameleon:
+
+ssh inf17168@login.dhbw-stuttgart.de
+ssh chameleon
+
+gcc a01.c -ansi -Wall
+
+SFTP Verbindung:
+
+sftp inf17168@login.dhbw-stuttgart.de
+
+help
+put PathLocal NewName PathRemote
+get PathRemote NewName PathLocal

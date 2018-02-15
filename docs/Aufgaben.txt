@@ -1,0 +1,197 @@
+a01.Asciitabelle 
+Ausgabe der 256 Werte, die eine Variable vom Typ char annehmen kann. 
+Die Ausgabe soll folgende Gestalt haben:
+
+   |00 01 02 03 04 .. 15 
+---+--------------------
+  0| 
+ 16| 
+ 32| 
+ 48|
+...| 
+240|
+
+Innerhalb dieser 16x16-Tabelle sollen die Zeichen stehen. 
+
+a02.Primfaktorzerlegung 
+Positive Zahl eingeben und Primfaktoren in folgender Form ausgeben: 
+zahl = p1*p2*...*pn 
+
+a03.Bruchkürzen 
+2 ganze Zahlen (Zähler+Nenner) eingeben und maximal gekürzter 
+Zähler und Nenner ausgeben. 
+
+a04.GGT/KGV 
+Zwei positive ganze Zahlen einlesen. Größten gemeinsamen Teiler (GGT) 
+und kleinstes gemeinsames Vielfaches (KGV) ausgeben. 
+
+a05.Durchschnitt 
+Es sollen reelle Werte eingelesen werden und deren Durchschnitt ausgegeben 
+werden. 
+a) Eingabe, wieviel Zahlen einzulesen sind, danach Eingabe der Zahlen.
+ Nach der letzten Zahl Berechnung und Ausgabe des Durchschnitts. 
+b) Nach jeder eingegebenen Zahl, Abfrage, ob weitere Zahl eingegeben werden 
+soll. Wenn nein, Berechnung und Ausgabe des Durchschnitts. 
+
+a06.Nachkommastellen 
+Eingabe einer reellen Zahl r und einer positiven ganzen Zahl n. 
+Ausgabe von r auf n Nachkommastellen gerundet mit 20 Nachkommastellen.
+ z.B. Eingabe 3.1415926 und 4 -> Ausgabe: 3.14160000000000000000 
+
+a07.Zahlenumwandlung 
+Eingabe einer positiven ganzen Zahl z und einer Zahl s=2..16. 
+Ausgabe von z im s-System.
+ z.B. Eingabe 45054 und 16 -> Ausgabe: AFFE 
+
+a08.Eingabe von 10 double-Werten. Ausgabe: die Eingabewerte der Größe nach 
+(aufsteigend) sortiert. 
+
+a09.Simulieren Sie eine Lottoziehung (7 aus 49). 
+Dabei sollen die ersten 6 Werte sortiert ausgegeben werden. 
+
+a10.Der Inhalt einer Datei soll seitenweise ausgegeben werden, d.h. durch 
+Drücken der RETURN-TASTE soll die nächste Seite des Fileinhalts 
+angezeigt werden. 
+Anschliessend Ausgabe der Zeichen- und Zeilenzahl der Datei. 
+Aufruf: a10 "Datei" 
+Annahme: Das Ausgabefenster hat 25 Zeilen. 
+
+a11.Die Komponenten zweier dreidimensionaler Vektoren sind einzulesen. Die 
+Länge der beiden Vektoren und der Winkel zwischen ihnen sind zu berechnen. 
+
+
+- Es werden ZAHLEN eingegeben. Double Werte
+
+
+
+
+a12.Das Programm soll jedes Zeichen gegen ein anderes Zeichen ersetzen. Aufruf 
+des Programms: z.B. a12 Codetabelle < Klartext > Verschluesselung 
+a12 ist ihr Programm, Codetabelle ist ein File, der Zeilen der Form kv 
+enthält. Das Zeichen k im Klartext wird durch v in der Verschlüsselung 
+ersetzt. 
+
+- parameter Codetabelle starten
+- zu verschlüsselnder Text in externer Datei
+- neue Datei mit Namen Verschlüsselung
+- Sowohl Dateieingabe, als auch Tastatur Eingabe
+- Codetabelle in eigener Datei. (Datei im Schusser VZ)
+- getchar liest Zeichen für Zeichen aus
+- putchar gibt Zeichen für Zeichen aus
+
+
+
+
+
+a13.Das Programm soll 2 double Werte einlesen und deren Summe ausgeben. Die
+beiden Werte sollen einzeln eingelesen werden. Eine gültige Eingabe besteht
+dabei aus dem double-Wert gefolgt von einem RETURN. Ungültige Eingaben werden
+mit einer entsprechenden Fehlermeldung quittiert.
+
+- beide Werte einzeln einlesen
+- gültige Eingabe: doublewert und Return, kein Space oder sonstige Zeichen nach double. Entsprechende Fehlermeldung bei falschem Zeichen. Beliebige Eingabe möglich -> Fehlermeldung implementieren
+
+
+
+
+a14.In einen Fonds wird zu Beginn einer jeden Periode der Betrag R eingezahlt. 
+Am Ende einer jeden Periode wird das Fondsvermögen K mit dem Satz Z(%) verzinst. 
+Die Einzahlungen laufen über N Perioden. Berechnen Sie aus 3 frei vom Benutzer 
+eingebbaren Größen die vierte. Alle Größen sind positiv, die Periodenzahl zudem noch 
+ganzzahlig. 
+
+- nur Zahlen werden eingegeben
+- nur positive Zahlen
+
+
+
+a15.Simulieren Sie eine schiefen Wurf. 
+Eine Kugel mit Durchmesser 0<=d<=1m und einer Masse 0<m<=10kg wird unter einem 
+Winkel 0<α<=90° mit einer Geschwindigkeit 0<v<=5000 m/s vom Erdboden geschossen. 
+Berechnen Sie die Reichweite, Gipfelhöhe und Flugzeit 
+
+1. nach der klassischen Methode (flache Erde,luftleerer Raum), 
+2. unter Berücksichtigung der Kugelform der Erde und des Luftwiderstands) 
+mit einer Genauigkeit von 1m bzw. 1s. Weitere Infos in a15doc.pdf.
+
+- Physikalische Details im VZ (a15doc)
+- Funktion simpStep im VZ
+- 
+
+
+
+
+
+
+
+a16.Mastermind. 
+Mastermind ist ein Spiel zu zweit. Einer denkt sich eine 5-stellige Ziffernkombination, 
+die der andere in höchstens 12 Versuchen knacken muss. Jeder 
+Rateversuch wird mit s:w bewertet, wobei s die Anzahl der Ziffern ist, die 
+an der richtigen Stelle stehen, während w angibt, wieviele Ziffern im Versuch 
+zwar richtig enthalten sind, aber an der falschen Stelle stehen. Der Rater hat 
+daher die Kombination erraten, wenn sein Versuch mit 5:0 bewertet wurde. 
+Realisieren Sie dieses Spiel, wobei der Anwender entscheidet, welchen Part er 
+übernimmt. 
+
+- Algorythmus schreiben, der immer Lösung findet, wenn Zahl angegeben wird.
+
+
+
+
+
+
+a17.Mittelwert und Standardabweichung 
+Eine beliebige Anzahl von double Werten soll eingelesen werden (siehe a05). 
+Danach soll der Durchschnitt(m) und die Standardabweichung(s) nach der Formel
+    _____________________ 
+ s=√(1/N)*Σ[(xi-m)2]
+ mit N:Anzahl der Eingaben, m=(1/N)*Σ(xi), xi: i-ter Eingabewert
+
+ ausgegeben werden. 
+
+- Zahl wird sicher eingegeben, kein Buchstaben Test erforderlich.
+
+
+
+
+
+
+
+a18.Determinantenberechnung 
+Geben Sie die Größe und die Koeffizienten einer Determinante ein. 
+Berechnen Sie die Determinante 
+
+- positive Zahl wird sicher eingegeben
+
+
+
+
+
+a19.Addieren bzw. subtrahieren Sie 2 Zahlen. 
+Die Eingabe für das Programm sieht so aus: 
+Zahl Op Zahl "="
+ mit 
+Zahl ::= Ziffer { Ziffer } [ "," Ziffer { Ziffer } ] 
+Ziffer ::= "0" | "1" | "2" | ... | "9" 
+Op ::= "+" | "-"
+ Das Programm prüft zunächst, ob die Eingabe den o.g. Regeln entspricht. 
+Wenn ja, wird, je nach Op, die entsprechende Operation ausgeführt. 
+Das Ergebnis soll genau sein! 
+
+- Keine unerwartete Zeicheneingabe. Aber maximal 1 Komma etc.
+- Das Ergebnis soll genau sein
+- Programm muss Fehler nicht feststellen
+
+
+
+
+a20.Simulieren Sie einen Stack für strings: 
+Folgende Eingaben soll das Programm erlauben: 
+
+'+': Ablegen des einzulesenden Strings auf den Stack. 
+'-': Anzeigen und entfernen des obersten Stackelements. 
+'?': Ausgabe der Stackgröße (Anzahl der Elemente und Zeichen). 
+'q': Beenden des Programms und Entfernen des Stacks. 
+
+- 
