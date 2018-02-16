@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 
 int main(int argc, char *argv[])
@@ -21,7 +22,7 @@ int main(int argc, char *argv[])
 
     
     while((charIn = getchar()) != EOF){
-
+        
         /* Codetabelle einlesen */
         FILE *codeTable = fopen(argv[1], "r");
 
@@ -59,7 +60,7 @@ int main(int argc, char *argv[])
             putchar(charOut);
             bOut = 1;
         }
-
+        fclose(codeTable);
         
     }
     return 0;
