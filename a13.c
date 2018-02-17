@@ -16,7 +16,7 @@ int main()
         ungetc(firstChar, stdin);
 
         /* Erstes Zeichen wird überprüft */
-        if((firstChar > '0' && firstChar < '9') || firstChar == '.' || firstChar == '-' || firstChar == '+'){
+        if((firstChar >= '0' && firstChar <= '9') || firstChar == '.' || firstChar == '-' || firstChar == '+'){
             bScan = scanf("%lf%c", &nNum[i], &plh) == 2;
             if(bScan){
 
