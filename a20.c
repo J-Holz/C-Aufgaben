@@ -1,6 +1,8 @@
 /* Das Programm stapelt Strings aufeinander. 
 Es ist erlaubt neue Strings zu erstellen, den Obersten zu löschen und anzuzeigen, die Stackgröße auszugeben und den verwendeten Specher frei zu geben. */
 
+/* valgrind ./a20 */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,7 +11,7 @@ void addStack();
 void remStack();
 void showSize();
 void freeMem();
-int insertString(int length);
+void insertString(int length);
 struct stack* getCurrent();
 
 struct stack{
@@ -19,15 +21,15 @@ struct stack{
     struct stack *next;
 };
 struct stack *new;
-struct stack *first;
+struct stack *first = NULL;
 struct stack *current;
+struct stack *currentTmp;
 
-int i = 0, n = 0;
-char currChar, plh;
+int i = 0, n = 0, remStackNum;
+char plh;
 
 int main()
 {
-    int c;
     char charin;
 
         printf("Das Programm stapelt Stings.\nWelche Aktion möchtest du ausführen?\n\n"
@@ -38,7 +40,6 @@ int main()
 
     do{
         printf("Kommando [ + | - | ? | q ]:");
-        c = 0;
         charin = getchar();
         switch(charin)
         {
@@ -48,27 +49,27 @@ int main()
 
             case '-':
                 remStack();
-                getchar();
+                while((charin=getchar())!='\n');
                 break;
 
             case '?':
                 showSize();
+                while((charin=getchar())!='\n');
                 break;
 
             case 'q':
                 freeMem();
+                while((charin=getchar())!='\n');
+                charin = 'q';
                 break;
 
             default:
-                c++;
-                if(c==1){
-                    printf("\nDas war eine ungültige Eingabe, bitte versuche es erneut.\n");
-                }
+                while((charin=getchar())!='\n');
+                printf("\nDas war eine ungültige Eingabe, bitte versuche es erneut.\n");
                 break;
         }
 
-
-    }while(charin < 'q' || charin > 'q');
+    }while(charin != 'q');
     return 0;
 }
 
@@ -83,24 +84,24 @@ int main()
 /* Fügt Stack hinzu */
 void addStack()
 {
-    int length = 16;
+    int length = 1;
     i++;
 
     /* Ersten String ablegen */
-    if(i==1){
+    if(getCurrent() == NULL){
         first=(struct stack *)malloc(sizeof(struct stack));
-        if(first==NULL){
+        if(first == NULL){
             printf("Ein Speicher Fehler ist aufgetreten, das Programm wird beendet.");
             exit(1);
         }
         current = first;
         current->string = (char *)calloc(length, sizeof(char));
-        if(current->string==NULL){
+        if(current->string == NULL){
             printf("Ein Speicher Fehler ist aufgetreten, das Programm wird beendet.");
             exit(1);
         }
         current->stackNum = i;
-        length = insertString(length);
+        insertString(length);
         current->next = NULL;
 
     /* Weitere Strings */
@@ -110,15 +111,15 @@ void addStack()
             printf("Ein Speicher Fehler ist aufgetreten, das Programm wird beendet.");
             exit(1);
         }
-        current->next=new;
-        current=new;
+        current->next = new;
+        current = new;
         current->string = (char *)calloc(length, sizeof(char));
-        if(current->string==NULL){
+        if(current->string == NULL){
             printf("Ein Speicher Fehler ist aufgetreten, das Programm wird beendet.");
             exit(1);
         }
         current->stackNum = i;
-        length = insertString(length);
+        insertString(length);
         current->next = NULL;
     }
 }
@@ -127,17 +128,27 @@ void addStack()
 void remStack()
 {
     n = -1;
-    current = getCurrent();
-    if(current==NULL){
-        printf("\nDer Stack ist bereits leer, du kannst nichts mehr löschen.\n\n");
+    if(getCurrent() == NULL){
+        printf("Der Stack ist bereits leer, du kannst nichts mehr löschen.\n");
     }else{
+        current = getCurrent();
         do{
             n++;
             putchar(current->string[n]);
         }while(current->string[n] != '\n');
-        free(current->string);
-        free(current->next);
+        remStackNum = current->stackNum;
         free(current);
+
+        if(remStackNum > 1){
+            current = first;
+            while(current->stackNum != remStackNum-1){
+                current = current->next;
+            }
+            current->next = NULL;
+        }else{
+            first = NULL;
+        }
+        i--;
     }
 }
 
@@ -145,23 +156,38 @@ void remStack()
 void showSize()
 {
     int z = 0;
-    current = first;
-    do{
-        printf("Stack %i enthält %i Zeichen\n", current->stackNum ,current->zNum);
-        z = z + current->zNum;
-        current = current->next;
-    }while(current->next!=NULL);
+    if(getCurrent() == NULL){
+        printf("Der Stack umfasst aktuell 0 String(s) und 0 Zeichen.\n");
+    }else{
+        current = first;
+        do{
+            z = z + current->zNum;
+            if(current->next == NULL)
+                break;
+            current = current->next;
+        }while(1);
 
-    printf("Der Stack umfasst aktuell %i Strings und %i Zeichen.\n", current->stackNum, z);
+        printf("Der Stack umfasst aktuell %i String(s) und %i Zeichen.\n", current->stackNum, z);
+    }
 }
 
 /* Entfernt ggf alle Stacks */
 void freeMem()
 {
-    do{
+    while(getCurrent() != NULL){
         current = getCurrent();
+        remStackNum = current->stackNum;
         free(current);
-    }while(current!=NULL);
+        if(remStackNum > 1){
+            current = first;
+            while(current->stackNum != remStackNum-1){
+                current = current->next;
+            }
+            current->next = NULL;
+        }else{
+            first = NULL;
+        }
+    }
 }
 
 
@@ -173,16 +199,23 @@ void freeMem()
 
 
 /* Gibt zuletzt eingegebenen Stack zurück */
-struct stack* getCurrent(){
-    current = first;
-    while(current->next!=NULL){
-        current = current->next;
+/* nicht auf  */
+struct stack* getCurrent()
+{
+    if(first!=NULL){
+        current = first;
+        while(current->next!=NULL){
+            current = current->next;
+        }
+        return current;
+    }else{
+        return NULL;
     }
-    return current;
 }
 
 /* Fügt String in aktuellen Stack ein */
-int insertString(int length){
+void insertString(int length)
+{
     char *tmpMem;
     n = -1;
     current = getCurrent();
@@ -191,24 +224,25 @@ int insertString(int length){
     do{
         n++;
         if(n<length){
-            currChar = getchar();
-            current->string[n] = currChar;
-            printf("string[%i] = %c\n", n, current->string[n]);
+            current->string[n] = getchar();
 
         /* Wenn Speicher zu klein */
         }else{
+            n--;
+
+            /* current->string in tmp schieben, Speicher neu vergeben und zurück schieben */
             tmpMem = (char *)calloc(length, sizeof(char));
             memcpy(tmpMem, current->string, length);
-            length *= 2;
+
+            length += 1;
             free(current->string);
             current->string = (char *)calloc(length, sizeof(char));
-            memcpy(current->string, tmpMem, length/2);
+
+            memcpy(current->string, tmpMem, length-1);
             free(tmpMem);
-            printf("Speicher erweitert!\nlength: %i\n", length);
         }
     }while(current->string[n]!='\n');
     current->zNum = n;
-    return length;
 }
 
 /* a20.Simulieren Sie einen Stack für strings: 
