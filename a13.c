@@ -1,3 +1,5 @@
+/* Das Programm soll 2 double Werte einlesen und deren Summe ausgeben, wobei keine Fehler entstehen dürfen, egal welche Zeichenkombinationen der Nutzer eingibt. */
+
 #include <stdio.h>
 
 
