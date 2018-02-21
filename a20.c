@@ -104,8 +104,8 @@ void addStack()
             exit(1);
         }
         current->stackNum = i;
-        insertString(length);
         current->next = NULL;
+        insertString(length);
 
     /* Weitere Strings */
     }else{
@@ -122,8 +122,8 @@ void addStack()
             exit(1);
         }
         current->stackNum = i;
-        insertString(length);
         current->next = NULL;
+        insertString(length);
     }
 }
 
@@ -206,16 +206,12 @@ void freeMem()
 struct stack* getCurrent()
 {
     if(first!=NULL){
-printf("In if()\n");
         current = first;
         while(current->next!=NULL){
-printf("In Schleife\n");
             current = current->next;
         }
-printf("Bevor Return\n");
         return current;
     }else{
-printf("In else\n");
         return NULL;
     }
 }
@@ -225,9 +221,7 @@ void insertString(int length)
 {
     char *tmpMem;
     n = -1;
-printf("Vor getCurrent\n");
     current = getCurrent();
-printf("Nach getCurrent\n");
 
     /* Speicher mit String füllen */
     do{
@@ -247,8 +241,8 @@ printf("Nach getCurrent\n");
             }
             memcpy(tmpMem, current->string, length);
 
-            length += 1;
             free(current->string);
+            length += 1;
             current->string = (char *)calloc(length, sizeof(char));
             if(current->string == NULL){
                 printf("Ein Speicherfehler ist aufgetreten, das Programm wird beendet.\n");
