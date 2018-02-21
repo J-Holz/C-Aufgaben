@@ -62,10 +62,13 @@ int main()
                 while((charin=getchar())!='\n');
                 charin = 'q';
                 break;
+            
+            case '\n':
+                break;
 
             default:
                 while((charin=getchar())!='\n');
-                printf("\nDas war eine ungültige Eingabe, bitte versuche es erneut.\n");
+                printf("Ungültige Eingabe.\n");
                 break;
         }
 
@@ -89,15 +92,15 @@ void addStack()
 
     /* Ersten String ablegen */
     if(getCurrent() == NULL){
-        first=(struct stack *)malloc(sizeof(struct stack));
+        first = (struct stack *)malloc(sizeof(struct stack));
         if(first == NULL){
-            printf("Ein Speicher Fehler ist aufgetreten, das Programm wird beendet.");
+            printf("Ein Speicherfehler ist aufgetreten, das Programm wird beendet.");
             exit(1);
         }
         current = first;
         current->string = (char *)calloc(length, sizeof(char));
         if(current->string == NULL){
-            printf("Ein Speicher Fehler ist aufgetreten, das Programm wird beendet.");
+            printf("Ein Speicherfehler ist aufgetreten, das Programm wird beendet.");
             exit(1);
         }
         current->stackNum = i;
@@ -106,16 +109,16 @@ void addStack()
 
     /* Weitere Strings */
     }else{
-        new=(struct stack *)malloc(sizeof(struct stack));
-        if(new==NULL){
-            printf("Ein Speicher Fehler ist aufgetreten, das Programm wird beendet.");
+        new = (struct stack *)malloc(sizeof(struct stack));
+        if(new == NULL){
+            printf("Ein Speicherfehler ist aufgetreten, das Programm wird beendet.");
             exit(1);
         }
         current->next = new;
         current = new;
         current->string = (char *)calloc(length, sizeof(char));
         if(current->string == NULL){
-            printf("Ein Speicher Fehler ist aufgetreten, das Programm wird beendet.");
+            printf("Ein Speicherfehler ist aufgetreten, das Programm wird beendet.");
             exit(1);
         }
         current->stackNum = i;
@@ -199,16 +202,20 @@ void freeMem()
 
 
 /* Gibt zuletzt eingegebenen Stack zurück */
-/* nicht auf  */
+/* todo: current = current->next; MACHT ALLES KAPUTT */
 struct stack* getCurrent()
 {
     if(first!=NULL){
+printf("In if()\n");
         current = first;
         while(current->next!=NULL){
+printf("In Schleife\n");
             current = current->next;
         }
+printf("Bevor Return\n");
         return current;
     }else{
+printf("In else\n");
         return NULL;
     }
 }
@@ -218,7 +225,9 @@ void insertString(int length)
 {
     char *tmpMem;
     n = -1;
+printf("Vor getCurrent\n");
     current = getCurrent();
+printf("Nach getCurrent\n");
 
     /* Speicher mit String füllen */
     do{
@@ -232,12 +241,19 @@ void insertString(int length)
 
             /* current->string in tmp schieben, Speicher neu vergeben und zurück schieben */
             tmpMem = (char *)calloc(length, sizeof(char));
+            if(tmpMem == NULL){
+                printf("Ein Speicherfehler ist aufgetreten, das Programm wird beendet.\n");
+                exit(1);
+            }
             memcpy(tmpMem, current->string, length);
 
             length += 1;
             free(current->string);
             current->string = (char *)calloc(length, sizeof(char));
-
+            if(current->string == NULL){
+                printf("Ein Speicherfehler ist aufgetreten, das Programm wird beendet.\n");
+                exit(1);
+            }
             memcpy(current->string, tmpMem, length-1);
             free(tmpMem);
         }
