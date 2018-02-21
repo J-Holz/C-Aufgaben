@@ -140,6 +140,7 @@ void remStack()
             putchar(current->string[n]);
         }while(current->string[n] != '\n');
         remStackNum = current->stackNum;
+        free(current->string);
         free(current);
 
         if(remStackNum > 1){
@@ -180,6 +181,7 @@ void freeMem()
     while(getCurrent() != NULL){
         current = getCurrent();
         remStackNum = current->stackNum;
+        free(current->string);
         free(current);
         if(remStackNum > 1){
             current = first;
@@ -202,7 +204,6 @@ void freeMem()
 
 
 /* Gibt zuletzt eingegebenen Stack zurück */
-/* todo: current = current->next; MACHT ALLES KAPUTT */
 struct stack* getCurrent()
 {
     if(first!=NULL){
