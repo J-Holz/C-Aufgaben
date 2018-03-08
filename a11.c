@@ -61,15 +61,20 @@ int calcAngle(){
                 + (aVek[0][2]*aVek[1][2]);
 
     /*Winkel berechnen*/
-    double x = skal / (aLen[0] * aLen[1]);
-    if(x < -1 || x > 1){
-        printf("Der Arkuskosinus konnte nicht berechnet werden, bitte versuche es erneut.");
-        return 1;
+    if(aVek[0][0] == aVek[0][1] && aVek[0][0] == aVek[0][2] && aVek[0][0] == aVek[1][0] && aVek[0][0] == aVek[1][1] && aVek[0][0] == aVek[1][2]){
+        printf("Der Winkel zwischen beiden Vektoren beträgt 0 Grad.\n");
+    }else if(aVek[0][0] == aVek[0][1] && aVek[0][0] == aVek[0][2] && aVek[0][0] == aVek[1][0]*(-1) && aVek[0][0] == aVek[1][1]*(-1) && aVek[0][0] == aVek[1][2]*(-1)){
+        printf("Der Winkel zwischen beiden Vektoren beträgt 180 Grad.\n");
+    }else{
+        double x = skal / (aLen[0] * aLen[1]);
+        if(x < -1 || x > 1){
+            printf("Ein Fehler ist aufgetreten, bitte versuche es erneut.");
+            return 1;
+        }
+        double sol =  (acos (x)) * (180 / PI);
+        printf("Der Winkel zwischen beiden Vektoren beträgt %lf Grad.\n", sol);
     }
-    double sol =  (acos (x)) * (180 / PI);
     
-
-    printf("Der Winkel zwischen beiden Vektoren beträgt %lf Grad.\n", sol);
     return 0;
 }
 
